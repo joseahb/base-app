@@ -6,27 +6,23 @@ import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { apiBackendProvider } from './_helpers/api.backend';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent, 
     HomeComponent, 
-    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
     ReactiveFormsModule, 
-<<<<<<< HEAD
-    HttpClientModule
-=======
-    HttpClient
->>>>>>> 1cacb57c205f2104c000fad6fbd052a5a3c3cecf
+    HttpClientModule,
+    SharedModule, 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS , useClass: AuthInterceptor, multi: true},
