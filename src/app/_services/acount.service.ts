@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { environment } from '@environments/environment';
-import { User } from 'src/app/_models';
+import { environment } from 'src/environments/environment';
+import { User } from 'app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -24,8 +24,9 @@ export class AccountService {
         return this.userSubject.value;
     }
 
-    login(username, password) {
-        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
+    login(userId: string, password:string) {
+        userId.toLowerCase();
+        return this.http.post<User>(`${environment.apiUrl}/login`, { userId, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
@@ -42,7 +43,7 @@ export class AccountService {
     }
 
     register(user: User) {
-        return this.http.post(`${environment.apiUrl}/users/register`, user);
+        return this.http.post(`${environment.apiUrl}/register`, user);
     }
 
     getAll() {

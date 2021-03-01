@@ -5,7 +5,7 @@ import { delay, materialize, dematerialize } from 'rxjs/operators';
 
 // array in local storage for registered users
 const usersKey = 'angular-10-registration-login-example-users';
-let users = JSON.parse( localStorage.getItem(usersKey) ) || [];
+let users = JSON.parse(localStorage.getItem(usersKey)) || [];
 
 @Injectable()
 export class ApiBackendInterceptor implements HttpInterceptor {
@@ -15,23 +15,23 @@ export class ApiBackendInterceptor implements HttpInterceptor {
         return handleRoute();
 
         function handleRoute() {
-            switch (true) {
-                case url.endsWith('/users/authenticate') && method === 'POST':
-                    return authenticate();
-                case url.endsWith('/users/register') && method === 'POST':
-                    return register();
-                case url.endsWith('/users') && method === 'GET':
-                    return getUsers();
-                case url.match(/\/users\/\d+$/) && method === 'GET':
-                    return getUserById();
-                case url.match(/\/users\/\d+$/) && method === 'PUT':
-                    return updateUser();
-                case url.match(/\/users\/\d+$/) && method === 'DELETE':
-                    return deleteUser();
-                default:
+            // switch (true) {
+            //     case url.endsWith('/users/authenticate') && method === 'POST':
+            //         return authenticate();
+            //     case url.endsWith('/users/register') && method === 'POST':
+            //         return register();
+            //     case url.endsWith('/users') && method === 'GET':
+            //         return getUsers();
+            //     case url.match(/\/users\/\d+$/) && method === 'GET':
+            //         return getUserById();
+            //     case url.match(/\/users\/\d+$/) && method === 'PUT':
+            //         return updateUser();
+            //     case url.match(/\/users\/\d+$/) && method === 'DELETE':
+            //         return deleteUser();
+            //     default:
                     // pass through any requests not handled above
                     return next.handle(request);
-            }    
+            // }    
         }
 
         // route functions
@@ -131,7 +131,7 @@ export class ApiBackendInterceptor implements HttpInterceptor {
 }
 
 export const apiBackendProvider = {
-    // use api backend in place of Http service for backend-less development
+    // use fake backend in place of Http service for backend-less development
     provide: HTTP_INTERCEPTORS,
     useClass: ApiBackendInterceptor,
     multi: true

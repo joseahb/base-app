@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AccountService, AlertService } from 'src/app/_services';
+import { AccountService, AlertService } from 'app/_services';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.formBuilder.group({
-            username: ['', Validators.required],
+            userId: ['', Validators.required],
             password: ['', Validators.required]
         });
     }
@@ -41,12 +41,12 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.accountService.login(this.f.username.value, this.f.password.value)
+        this.accountService.login(this.f.userId.value, this.f.password.value)
             .pipe(first())
             .subscribe({
                 next: () => {
                     // get return url from query parameters or default to home page
-                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
                     this.router.navigateByUrl(returnUrl);
                 },
                 error: error => {
