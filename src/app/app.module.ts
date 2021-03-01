@@ -22,7 +22,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule, 
     ReactiveFormsModule, 
+<<<<<<< HEAD
     HttpClientModule
+=======
+    HttpClient
+>>>>>>> 1cacb57c205f2104c000fad6fbd052a5a3c3cecf
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS , useClass: AuthInterceptor, multi: true},
